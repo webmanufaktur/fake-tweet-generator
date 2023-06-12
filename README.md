@@ -2,6 +2,8 @@
 
 The Tweet Screenshot Generator is a handy tool that enables users to create screenshots of tweets with customizable details. With this tool, you can add an avatar, name, handle, reply count, likes count, retweet count, and view stats to simulate a realistic tweet screenshot. Whether you need to create mock-ups for presentations, share screenshots on social media, or simply have some fun, this tool has got you covered.
 
+![Tweet Screenshot Generator](fake-tweet-generator.png)
+
 ## Features
 
 - Generate realistic tweet screenshots with custom details.
