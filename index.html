@@ -13,7 +13,7 @@
       }
     </style>
   </head>
-  <body class="" x-data>
+  <body class="" x-data="app">
     <div class="flex min-h-screen">
       <div class="w-[400px] p-12 font-mono">
         <div class="space-y-4">
@@ -25,7 +25,7 @@
                 type="text"
                 name="ftname"
                 id="ftname"
-                x-model:value="$store.settings.data.ftname"
+                x-model:value="$store.tweet.data.ftname"
             /></label>
           </div>
 
@@ -37,7 +37,7 @@
                 type="text"
                 name="fthandle"
                 id="fthandle"
-                x-model:value="$store.settings.data.fthandle"
+                x-model:value="$store.tweet.data.fthandle"
             /></label>
           </div>
 
@@ -49,7 +49,7 @@
                   type="checkbox"
                   name="ftverified"
                   id="ftverified"
-                  x-model="$store.settings.data.ftverified"
+                  x-model="$store.tweet.data.ftverified"
                   class="form-checkbox rounded text-blue-400"
                 />
                 <div class="ml-1">Show verification badge</div>
@@ -66,7 +66,7 @@
                 type="text"
                 name="ftavatar"
                 id="ftavatar"
-                x-model="$store.settings.data.ftavatar"
+                x-model="$store.tweet.data.ftavatar"
             /></label>
             <div class="pt-2 text-sm text-gray-500">
               Add any image url you like.
@@ -81,7 +81,7 @@
                 name="fttext"
                 id="fttext"
                 rows="10"
-                x-model:value="$store.settings.data.fttext"
+                x-model:value="$store.tweet.data.fttext"
               >
               </textarea>
               <span class="text-sm">
@@ -98,7 +98,7 @@
                 type="text"
                 name="ftreplies"
                 id="ftreplies"
-                x-model:value="$store.settings.data.ftreplies"
+                x-model:value="$store.tweet.data.ftreplies"
             /></label>
           </div>
           <div>
@@ -109,7 +109,7 @@
                 type="text"
                 name="ftretweets"
                 id="ftretweets"
-                x-model:value="$store.settings.data.ftretweets"
+                x-model:value="$store.tweet.data.ftretweets"
             /></label>
           </div>
           <div>
@@ -120,7 +120,7 @@
                 type="text"
                 name="ftlikes"
                 id="ftlikes"
-                x-model:value="$store.settings.data.ftlikes"
+                x-model:value="$store.tweet.data.ftlikes"
             /></label>
           </div>
           <div>
@@ -131,16 +131,16 @@
                 type="text"
                 name="ftstats"
                 id="ftstats"
-                x-model:value="$store.settings.data.ftstats"
+                x-model:value="$store.tweet.data.ftstats"
             /></label>
           </div>
         </div>
 
         <div class="mt-12">
           <button
-            x-on:click="localStorage.clear(), location.reload()"
+            @click="reloadPage(), clearLocalStorage()"
             type="button"
-            class="cursor-pointer rounded bg-blue-500 px-4 py-2 text-sm uppercase text-white"
+            class="cursor-pointer rounded bg-red-500 px-4 py-2 text-sm uppercase text-white"
           >
             Reset to default settings
           </button>
@@ -157,26 +157,26 @@
             <div class="flex items-center px-6 py-4">
               <div class="mr-2">
                 <img
-                  :src="$store.settings.data.ftavatar"
+                  :src="$store.tweet.data.ftavatar"
                   class="block aspect-square h-12 w-full rounded-full object-cover"
                   alt=""
-                  x-show="$store.settings.data.ftavatar"
+                  x-show="$store.tweet.data.ftavatar"
                 />
                 <img
-                  src="https://pbs.twimg.com/profile_images/1666179268265627649/esN51Gty_400x400.png"
+                  src="./profile_icon.jpg"
                   class="block h-12 w-12 rounded-full"
                   alt=""
-                  x-show="!$store.settings.data.ftavatar"
+                  x-show="!$store.tweet.data.ftavatar"
                 />
               </div>
               <div>
                 <!-- HANDLE -->
                 <span class="relative text-sm font-bold leading-tight">
                   <span
-                    x-text="$store.settings.data.ftname"
+                    x-text="$store.tweet.data.ftname"
                     x-show="ftname"
                   ></span>
-                  <span x-show="!$store.settings.data.ftname"
+                  <span x-show="!$store.tweet.data.ftname"
                     >Alexander Abelt</span
                   >
 
@@ -186,7 +186,7 @@
                     role="img"
                     class="absolute -right-[22px] -top-1 h-5 w-5 text-[#1da1f2]"
                     fill="currentColor"
-                    x-show="$store.settings.data.ftverified"
+                    x-show="$store.tweet.data.ftverified"
                   >
                     <g>
                       <path
@@ -198,10 +198,10 @@
                 <span class="flex text-sm leading-tight text-gray-500">
                   @
                   <span
-                    x-text="$store.settings.data.fthandle"
-                    x-show="$store.settings.data.fthandle"
+                    x-text="$store.tweet.data.fthandle"
+                    x-show="$store.tweet.data.fthandle"
                   ></span>
-                  <span x-show="!$store.settings.data.fthandle">acabelt</span>
+                  <span x-show="!$store.tweet.data.fthandle">acabelt</span>
                 </span>
               </div>
             </div>
@@ -212,11 +212,11 @@
                 class="tweet prose prose prose-a:text-blue-600 prose-img:w-full leading-tight"
               >
                 <span
-                  x-html="$store.settings.data.fttext"
+                  x-html="$store.tweet.data.fttext"
                   class="break-words"
-                  x-show="$store.settings.data.fttext"
+                  x-show="$store.tweet.data.fttext"
                 ></span>
-                <div x-show="!$store.settings.data.fttext">
+                <div x-show="!$store.tweet.data.fttext">
                   <strong>Fake Tweet Generator</strong> - Nur ein kleiner Spaß,
                   der jetzt auch die letzten Eingaben speichert.
                 </div>
@@ -238,10 +238,7 @@
                     </g>
                   </svg>
                 </div>
-                <div
-                  class="text-sm"
-                  x-text="$store.settings.data.ftreplies"
-                ></div>
+                <div class="text-sm" x-text="$store.tweet.data.ftreplies"></div>
               </div>
 
               <div class="flex text-gray-500">
@@ -260,7 +257,7 @@
                 </div>
                 <div
                   class="text-sm"
-                  x-text="$store.settings.data.ftretweets"
+                  x-text="$store.tweet.data.ftretweets"
                 ></div>
               </div>
               <div class="flex text-gray-500">
@@ -277,10 +274,7 @@
                     </g>
                   </svg>
                 </div>
-                <div
-                  class="text-sm"
-                  x-text="$store.settings.data.ftlikes"
-                ></div>
+                <div class="text-sm" x-text="$store.tweet.data.ftlikes"></div>
               </div>
 
               <div class="flex text-gray-500">
@@ -297,10 +291,7 @@
                     </g>
                   </svg>
                 </div>
-                <div
-                  class="text-sm"
-                  x-text="$store.settings.data.ftstats"
-                ></div>
+                <div class="text-sm" x-text="$store.tweet.data.ftstats"></div>
               </div>
 
               <div class="flex text-gray-500">
